@@ -3,6 +3,9 @@ import { Nunito } from "next/font/google";
 import "./globals.css";
 
 import { Navbar } from "./components/navbar/Navbar";
+import { RegisterModal } from "./components/modals/RegisterModal";
+
+import { Toaster } from "react-hot-toast";
 
 const nunito = Nunito({
   variable: "--font-nunito",
@@ -24,6 +27,8 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} ${nunito.className}`}
       >
+        <Toaster />
+        <RegisterModal />
         <Navbar />
         {children}
       </body>
