@@ -31,7 +31,7 @@ export const RegisterModal = () => {
         }
     });
 
-    const onSubmit: SubmitHandler<FieldValues> =(data) => {
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
 
         axios.post("/api/register", data)
@@ -71,7 +71,7 @@ export const RegisterModal = () => {
                 </div>
             </div>
         </div>
-    )
+    );
 
     return (
         <Modal isOpen={registerModal.isOpen} onClose={registerModal.onClose} onSubmit={handleSubmit(onSubmit)} title="Register" body={bodyContent} footer={footerContent} actionLabel="Continue" disabled={isLoading} />
