@@ -6,6 +6,18 @@ body,
   height: 100%;
 }
 
+/* Safari-specific optimizations for modal transitions */
+@supports (-webkit-backdrop-filter: blur()) {
+  .modal-backdrop {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000px;
+    perspective: 1000px;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+  }
+}
+
 /* :root {
   --background: #ffffff;
   --foreground: #171717;
