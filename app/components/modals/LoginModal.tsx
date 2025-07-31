@@ -67,8 +67,8 @@ export const LoginModal = () => {
     const footerContent = (
         <div className="flex flex-col gap-4 mt-3">
             <hr />
-            <Button label="Continue with Google" onClick={() => {}} outline icon={FcGoogle} />
-            <Button label="Continue with GitHub" onClick={() => {}} outline icon={AiFillGithub} />
+            <Button label="Continue with Google" onClick={() => signIn("google")} outline icon={FcGoogle} />
+            <Button label="Continue with GitHub" onClick={() => signIn("github")} outline icon={AiFillGithub} />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center justify-center gap-2">
                     <div>
