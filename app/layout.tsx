@@ -6,6 +6,7 @@ import "./globals.css";
 import { Navbar } from "./components/navbar/Navbar";
 import { LoginModal } from "./components/modals/LoginModal";
 import { RegisterModal } from "./components/modals/RegisterModal";
+import { RentModal } from "./components/modals/RentModal";
 
 import getCurrentUser from "./actions/getCurrentUser";
 
@@ -32,6 +33,7 @@ export default async function RootLayout({
         className={`${nunito.variable} ${nunito.className}`}
       >
         <Toaster />
+        <RentModal />
         <LoginModal />
         <RegisterModal />
         <Navbar currentUser={currentUser} />

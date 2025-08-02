@@ -7,6 +7,7 @@ import { AiFillGithub } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
+import { useLoginModal } from "@/app/hooks/useLoginModal";
 import { useRegisterModal } from "@/app/hooks/useRegisterModal";
 
 import { Button } from "../Button";
@@ -17,7 +18,9 @@ import { Modal } from "./Modal";
 import { signIn } from "next-auth/react";
 
 export const RegisterModal = () => {
+    const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
+
     const [isLoading, setIsLoading] = useState(false);
 
     const {
@@ -47,6 +50,13 @@ export const RegisterModal = () => {
             });
     }
 
+    const toggle = useCallback(() => {
+        registerModal.onClose();
+        setTimeout(() => {
+            loginModal.onOpen();
+        }, 100);
+    }, [loginModal, registerModal]);
+
     const bodyContent = (
         <div className="flex flex-col gap-4">
             <Heading title="Welcome to Airbnb" subtitle="Create an account" />
@@ -66,7 +76,7 @@ export const RegisterModal = () => {
                     <div>
                         Already have an account?
                     </div>
-                    <div onClick={registerModal.onClose} className="text-neutral-800 cursor-pointer hover:underline">
+                    <div onClick={toggle} className="text-neutral-800 cursor-pointer hover:underline">
                         Log in
                     </div>
                 </div>
