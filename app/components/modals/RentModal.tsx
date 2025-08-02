@@ -33,7 +33,7 @@ export const RentModal = () => {
         reset
     } = useForm<FieldValues>({
         defaultValues: {
-            categories: "",
+            category: "",
             location: null,
             guestCount: 1,
             roomCount: 1,
@@ -102,7 +102,7 @@ export const RentModal = () => {
             <Modal 
                 isOpen={rentModal.isOpen}
                 onClose={rentModal.onClose}
-                onSubmit={rentModal.onClose}
+                onSubmit={onNext}
                 title="Airbnb your home"
                 body={bodyContent}
                 actionLabel={actionLabel}
