@@ -15,12 +15,14 @@ interface ImageUploadProps {
 }
 
 export const ImageUpload = ({ onChange, value}: ImageUploadProps) => {
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET;
+
     const handleUpload = useCallback((result: any) => {
         onChange(result.info.secure_url);
     }, [onChange]);
 
     return (
-        <CldUploadWidget onSuccess={handleUpload} uploadPreset="bxwpk6ew" options={{ maxFiles: 1 }}>
+        <CldUploadWidget onSuccess={handleUpload} uploadPreset={uploadPreset} options={{ maxFiles: 1 }}>
             {({ open }) => {
                 return (
                     <div onClick={() => open?.()} className="relative cursor-pointer hover:opacity-70 transition border-dashed border-2 p-20 border-neutral-300 flex flex-col items-center justify-center gap-4 text-neutral-600">
