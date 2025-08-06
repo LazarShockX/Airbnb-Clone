@@ -1,8 +1,11 @@
 "use client";
 
+import axios from "axios";
+import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { useMemo, useState } from "react";
-import { FieldValues, useForm } from "react-hook-form";
+import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 
 import { useRentModal } from "@/app/hooks/useRentModal";
 
@@ -13,6 +16,7 @@ import { CategoryInput } from "../inputs/CategoryInput";
 import { CountrySelect } from "../inputs/CountrySelect";
 import { Counter } from "../inputs/Counter";
 import { ImageUpload } from "../inputs/ImageUpload";
+import { Input } from "../inputs/Input";
 
 enum Steps {
     CATEGORY = 0,
@@ -24,9 +28,11 @@ enum Steps {
 }
 
 export const RentModal = () => {
+    const router = useRouter();
     const rentModal = useRentModal();
 
     const [step, setStep] = useState(Steps.CATEGORY);
+    const [isLoading, setIsLoading] = useState(false);
 
     const {
         register,
@@ -74,6 +80,29 @@ export const RentModal = () => {
 
     const onNext = () => {
         setStep((value) => value + 1);
+    }
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        if (step !== Steps.PRICE) {
+            return onNext();
+        }
+
+        setIsLoading(true);
+
+        axios.post("/api/listings", data) 
+            .then(() => {
+                toast.success("Listing created!");
+                router.refresh();
+                reset();
+                setStep(Steps.CATEGORY);
+                rentModal.onClose();
+            })
+            .catch((error) => {
+                toast.error("All fields are required");
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
     }
 
     const actionLabel = useMemo(() => { // useMemo memoizes the computed value (return statement)
@@ -125,9 +154,9 @@ export const RentModal = () => {
             <div className="flex flex-col gap-8">
                 <Heading title="Share some basics about your place" subtitle="What amenities do you have?" />
                 <Counter title="Guests" subtitle="How many guests do you allow?" value={guestCount} onChange={(value) => setCustomValue("guestCount", value)} />
-                <hr />
+                <hr className="border-gray-200" />
                 <Counter title="Rooms" subtitle="How many rooms do you have?" value={roomCount} onChange={(value) => setCustomValue("roomCount", value)} />
-                <hr />
+                <hr className="border-gray-200" />
                 <Counter title="Bathrooms" subtitle="How many bathrooms do you have?" value={bathroomCount} onChange={(value) => setCustomValue("bathroomCount", value)} />
             </div>
         );
@@ -141,13 +170,33 @@ export const RentModal = () => {
             </div>
         );
     }
+
+    if (step === Steps.DESCRIPTION) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading title="How would you describe your place?" subtitle="Short and sweet works best" />
+                <Input id="title" label="Title" disabled={isLoading} required register={register} errors={errors} />
+                <hr className="border-gray-200" />
+                <Input id="description" label="Description" disabled={isLoading} required register={register} errors={errors} />
+            </div>
+        );
+    }
+
+    if (step === Steps.PRICE) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading title="Now, set your price" subtitle="How much do you want to charge per night?" />
+                <Input id="price" label="Price" disabled={isLoading} type="number" formatPrice required register={register} errors={errors} />
+            </div>
+        );
+    }
     
     return (
         <div>
             <Modal 
                 isOpen={rentModal.isOpen}
                 onClose={rentModal.onClose}
-                onSubmit={onNext}
+                onSubmit={handleSubmit(onSubmit)}
                 title="Airbnb your home"
                 body={bodyContent}
                 actionLabel={actionLabel}
