@@ -53,15 +53,15 @@ export const ListingInfo = ({ user, category, description, roomCount, guestCount
                     </div>
                 </div>
             </div>
-            <hr />
+            <hr className="border-gray-200" />
             {category && (
                 <ListingCategory icon={category.icon} label={category.label} description={category.description} />
             )}
-            <hr />
+            <hr className="border-gray-200" />
             <div className="text-lg font-light text-neutral-500">
                 {description}
             </div>
-            <hr />
+            <hr className="border-gray-200" />
             <Map center={coordinates} />
         </div>
     );
