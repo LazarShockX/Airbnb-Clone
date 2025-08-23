@@ -17,7 +17,7 @@ export async function DELETE(request: Request, context: { params: Promise<IParam
     const { reservationId } = await context.params;
 
     if (!reservationId || typeof reservationId !== "string") {
-        throw new Error("Invalid ID");
+        return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
 
     const reservation = await prisma.reservation.deleteMany({
