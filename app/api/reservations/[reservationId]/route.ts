@@ -25,11 +25,11 @@ export async function DELETE(request: Request, context: { params: Promise<IParam
             id: reservationId,
             OR: [
                 {
-                    userId: currentUser.id,
+                    userId: currentUser.id, // Allow deletion if the current user made the reservation
                 },
                 {
                     listing: {
-                        userId: currentUser.id,
+                        userId: currentUser.id, // Allow deletion if the current user owns the listing
                     }
                 }
             ]
