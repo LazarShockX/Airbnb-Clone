@@ -11,7 +11,7 @@ export async function DELETE(request: Request, context: { params: Promise<IParam
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { listingId } = await context.params;
