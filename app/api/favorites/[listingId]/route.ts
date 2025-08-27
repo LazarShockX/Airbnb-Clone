@@ -11,7 +11,7 @@ export async function POST(request: Request, context: { params: Promise<IParams>
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { listingId } = await context.params;
@@ -40,13 +40,13 @@ export async function DELETE(request: Request, context: { params: Promise<IParam
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-        return NextResponse.error();
+       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const { listingId } = await context.params;
 
     if (!listingId || typeof listingId !== "string") {
-        throw new Error("Invalid ID");
+        return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
     }
 
     let favoriteIds = [...(currentUser.favoriteIds || [])];
