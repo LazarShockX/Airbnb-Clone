@@ -16,6 +16,8 @@ const nunito = Nunito({
   subsets: ["latin"],
 });
 
+export const dynamic = 'force-dynamic';
+
 export const metadata: Metadata = {
   title: "Airbnb",
   description: "Airbnb Clone",
