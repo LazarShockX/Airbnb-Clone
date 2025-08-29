@@ -7,6 +7,8 @@ interface IParams {
     listingId: string;
 }
 
+export const dynamic = 'force-dynamic';
+
 export async function DELETE(request: Request, context: { params: Promise<IParams> }) {
     const currentUser = await getCurrentUser();
 
