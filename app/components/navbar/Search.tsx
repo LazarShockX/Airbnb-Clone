@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo } from "react";
+import { Suspense, useMemo } from "react";
 import { BiSearch } from "react-icons/bi";
 import { useSearchParams } from "next/navigation";
 import { differenceInDays } from "date-fns";
@@ -8,7 +8,7 @@ import { differenceInDays } from "date-fns";
 import { useSearchModal } from "@/app/hooks/useSearchModal";
 import { useCountries } from "@/app/hooks/useCountries";
 
-export const Search = () => {
+const SearchContent = () => {
     const searchModal = useSearchModal();
     const params = useSearchParams();
     const { getByValue } = useCountries();
@@ -71,3 +71,30 @@ export const Search = () => {
         </div>
     );
 }
+
+export const Search = () => {
+    return (
+        <Suspense fallback={
+            <div className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md transition cursor-pointer border-gray-200">
+                <div className="flex flex-row items-center justify-between">
+                    <div className="text-sm font-semibold px-6">
+                        Anywhere
+                    </div>
+                    <div className="hidden sm:block text-sm font-semibold px-6 border-x-[1px] border-gray-200 flex-1 text-center">
+                        Any week
+                    </div>
+                    <div className="text-sm pl-6 pr-2 text-gray-600 flex flex-row items-center gap-3">
+                        <div className="hidden sm:block">
+                            Add Guests
+                        </div>
+                        <div className="p-2 bg-rose-500 rounded-full text-white">
+                            <BiSearch size={18} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }>
+            <SearchContent />
+        </Suspense>
+    );
+};

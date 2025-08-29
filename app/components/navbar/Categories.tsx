@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense } from "react";
 import { TbBeach, TbMountain, TbPool } from "react-icons/tb";
 import { GiBarn, GiBoatFishing, GiCactus, GiCastle, GiCaveEntrance, GiForestCamp, GiIsland, GiWindmill } from "react-icons/gi";
 import { MdOutlineVilla } from "react-icons/md";
@@ -90,7 +91,7 @@ export const categories = [
     },
 ]
 
-export const Categories = () => {
+const CategoriesContent = () => {
     const params = useSearchParams();
     const category = params?.get("category");
 
@@ -111,5 +112,20 @@ export const Categories = () => {
                 </div>
             </Container>
         </div>
+    );
+}
+
+export const Categories = () => {
+    const pathname = usePathname();
+    const isMainPage = pathname === "/";
+
+    if (!isMainPage) {
+        return null;
+    }
+
+    return (
+        <Suspense fallback={<div className="h-16" />}>
+            <CategoriesContent />
+        </Suspense>
     );
 }
