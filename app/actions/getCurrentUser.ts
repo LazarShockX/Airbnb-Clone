@@ -1,10 +1,19 @@
+import { cookies } from "next/headers";
 import { getServerSession } from "next-auth";
 
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import { prisma } from "@/app/libs/prismadb";
 
 export async function getSession() {
-    return await getServerSession(authOptions);
+    const cookieStore = await cookies();
+    return await getServerSession({
+        req: {
+            headers: {
+                cookie: cookieStore.toString()
+            }
+        },
+        ...authOptions
+    });
 }
 
 export default async function getCurrentUser() {
