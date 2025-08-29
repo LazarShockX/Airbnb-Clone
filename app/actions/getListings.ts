@@ -59,7 +59,11 @@ export default async function getListings(context: { params: Promise<IListingsPa
                             {
                                 startDate: { lte: endDate },
                                 endDate: { gte: endDate }
-                            }
+                            },
+                            {
+                                startDate: { gte: startDate },
+                                endDate: { lte: endDate }
+                            }, 
                         ]
                     }
                 }
