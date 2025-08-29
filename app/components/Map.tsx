@@ -9,7 +9,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
 
 // Fix for marker icons not displaying correctly
-// @ts-expect-error
+// @ts-expect-error Deleting internal Leaflet property to reset icon configuration
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: markerIcon2x.src,
