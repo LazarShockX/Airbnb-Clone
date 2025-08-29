@@ -66,7 +66,7 @@ export const RentModal = () => {
         ssr: false,
     }), [location]);
 
-    const setCustomValue = (id: string, value: any) => {
+    const setCustomValue = (id: string, value: unknown) => {
         setValue(id, value, {
             shouldDirty: true, // Marks the field as changed
             shouldTouch: true, // Marks the field as interacted with
@@ -97,7 +97,7 @@ export const RentModal = () => {
                 setStep(Steps.CATEGORY);
                 rentModal.onClose();
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error("All fields are required");
             })
             .finally(() => {

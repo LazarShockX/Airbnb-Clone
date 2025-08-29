@@ -46,7 +46,8 @@ export default async function getReservations(context: { params: Promise<IParams
         }));
 
         return safeReservations;
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        console.error("Failed to get reservations: ", error);
+        return [];
     }
 }

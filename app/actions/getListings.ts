@@ -15,7 +15,7 @@ export default async function getListings(context: { params: Promise<IListingsPa
     try {
         const { userId, bathroomCount, guestCount, roomCount, startDate, endDate, locationValue, category } = await context.params;
 
-        let query: any = {};
+        const query: any = {};
 
         if (userId) {
             query.userId = userId;
@@ -83,7 +83,8 @@ export default async function getListings(context: { params: Promise<IListingsPa
         }));
 
         return safeListings;
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        console.error("Failed to get listings: ", error);
+        return [];
     }
 }

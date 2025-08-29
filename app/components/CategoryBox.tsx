@@ -22,7 +22,7 @@ export const CategoryBox = ({ label, icon: Icon, selected }: CategoryBoxProps) =
             currentQuery = qs.parse(params.toString()); // Parse current query parameters into an object
         }
 
-        const updatedQuery: any = {
+        const updatedQuery: Record<string, string> = {
             ...currentQuery, // Preserve existing query parameters
             category: label,
         }

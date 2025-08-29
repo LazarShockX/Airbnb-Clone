@@ -31,7 +31,8 @@ export default async function getListingById(context: { params: Promise<IParams>
                 emailVerified: listing.user.emailVerified?.toISOString() || null,
             }
         }
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        console.error("Failed to get listing by ID: ", error);
+        return null;
     }
 }
