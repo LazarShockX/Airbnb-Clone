@@ -24,7 +24,8 @@ export default async function getFavoriteListings() {
         }));
 
         return safeFavorites;
-    } catch (error: any) {
-        throw new Error(error?.message || "Failed to fetch favorite listings");
+    } catch (error: unknown) {
+        console.error("Failed to get favorite listings: ", error);
+        return [];
     }
 }

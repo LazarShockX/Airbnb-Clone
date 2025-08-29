@@ -60,7 +60,7 @@ export const SearchModal = () => {
             currentQuery = qs.parse(params.toString());
         }
 
-        const updatedQuery: any = {
+        const updatedQuery: Record<string, string | number | undefined> = {
             ...currentQuery,
             locationValue: location?.value,
             guestCount,

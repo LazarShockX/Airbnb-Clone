@@ -1,4 +1,5 @@
 import { prisma } from "@/app/libs/prismadb";
+import { Prisma } from "@prisma/client"
 
 export interface IListingsParams {
     userId?: string;
@@ -15,7 +16,7 @@ export default async function getListings(context: { params: Promise<IListingsPa
     try {
         const { userId, bathroomCount, guestCount, roomCount, startDate, endDate, locationValue, category } = await context.params;
 
-        let query: any = {};
+        const query: Prisma.ListingWhereInput = {};
 
         if (userId) {
             query.userId = userId;
@@ -83,7 +84,8 @@ export default async function getListings(context: { params: Promise<IListingsPa
         }));
 
         return safeListings;
-    } catch (error: any) {
-        throw new Error(error);
+    } catch (error: unknown) {
+        console.error("Failed to get listings: ", error);
+        return [];
     }
 }
