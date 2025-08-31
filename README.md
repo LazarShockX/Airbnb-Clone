@@ -2,6 +2,8 @@
 
 An Airbnb clone that enables users to browse and search property listings, make reservations, and manage bookings, with both host and guest functionalities. Built with Next.js, TypeScript, and Prisma. Check out the app on Vercel: [https://bookbnb-mu.vercel.app/](https://bookbnb-mu.vercel.app/)
 
+<img width="1088" height="713" alt="Screenshot 2025-08-31 at 13 41 10" src="https://github.com/user-attachments/assets/a5c08b80-50ec-45e3-9be6-41532a55a3b4" />
+
 <br/>
 <br/>
 
