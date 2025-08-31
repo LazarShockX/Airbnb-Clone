@@ -27,7 +27,7 @@ An Airbnb clone that enables users to browse and search property listings, make 
 - **My Properties**: List and manage your properties
 - **My Reservations**: Manage bookings on your properties
 
-### 🔐 Authentication & Security
+### Authentication & Security
 - Secure authentication with NextAuth.js
 - User session management
 - Protected routes and API endpoints
