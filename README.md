@@ -54,7 +54,7 @@ An Airbnb clone that enables users to browse and search property listings, make 
 
 ### Environment Variables
 
-Create a `.env.local` file with the following variables:
+Create a `.env` file with the following variables:
 
 ```env
 # Database
