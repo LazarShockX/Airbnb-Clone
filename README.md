@@ -32,6 +32,24 @@ An Airbnb clone that enables users to browse and search property listings, make 
 - User session management
 - Protected routes and API endpoints
 
+## 🛠️ Tech Stack
+
+### Frontend
+- **Next.js 15** - React framework with App Router
+- **TypeScript** - Type-safe development
+- **Tailwind CSS** - Utility-first styling
+- **React Hook Form** - Form handling and validation
+- **Leaflet** - Interactive maps
+
+### Backend and Database
+- **Next.js API Routes** - Server-side API endpoints
+- **NextAuth.js** - Authentication with GitHub and Google OAuth
+- **Prisma ORM** - Type-safe database access
+- **MongoDB** - NoSQL database
+- **bcrypt** - Password hashing
+- **Cloudinary** - Image upload and storage
+- **Axios** - HTTP client for API requests
+
 ## 🚀 Getting Started
 
 ### Environment Variables
