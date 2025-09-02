@@ -58,7 +58,7 @@ Create a `.env` file with the following variables:
 
 ```env
 # Database
-DATABASE_URL="DATABASE_URL="mongodb+srv://<username>:<password>@<cluster-url>/<dbname>"
+DATABASE_URL="mongodb+srv://<username>:<password>@<cluster-url>/<dbname>"
 
 # NextAuth
 NEXTAUTH_SECRET="your_nextauth_secret"
